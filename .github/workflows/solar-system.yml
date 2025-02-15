@@ -98,6 +98,13 @@ jobs:
             username: ${{ vars.DOCKERHUB_USERNAME }}
             password: ${{ secrets.DOCKERHUB_PASSWORD }} 
 
-            
+        - name: Build and push
+          uses: docker/build-push-action@v6
+          with:
+            context: .
+            push: false
+            tags: ${{ var.DOCKERHUB_USERNAME }}/solar-system:${{ github.sha }}
+
+
 
  
