@@ -101,7 +101,7 @@ jobs:
         # above tags image with sha of the commit, keep in mind the image is
         # built with the tag but not pushed to registry.  It is is in the 
         # local docker engine though!
-        - name: Build and push
+        - name: Docker Build and Tag
           uses: docker/build-push-action@v6
           with:
             context: .
@@ -125,6 +125,13 @@ jobs:
 
             echo Testing Image URL using wget
             wget -q -O - 127.0.0.1:3000/live | grep live
+
+        - name: Docker Push
+          uses: docker/build-push-action@v6
+          with:
+            context: .
+            push: true
+            tags: ${{ vars.DOCKERHUB_USERNAME }}/solar-system:${{ github.sha }}
 
 
 
