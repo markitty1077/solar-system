@@ -85,6 +85,7 @@ jobs:
             retention-days: 5
 
     docker:
+        permissions: write-all
         name: Containerization
         needs: [unit-testing, code-coverage]
         runs-on: ubuntu-latest
