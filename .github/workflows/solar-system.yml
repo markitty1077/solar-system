@@ -193,6 +193,20 @@ jobs:
           run: |
             kubectl apply -f kubernetes/development/*.yaml
             
+        - name: Create MongoDB Secret
+          run: |
+            kubectl -n ${{ vars.NAMESPACE }} create secret generic mongo-db-creds \
+            --from-literall=MONGO_URI=${{ env.MONGO_URI }} \ # defined in env
+            --from-literall=MONGO_USERNAME=${{ vars.MONGO_USERNAME }} \ # defined in repo
+            --from-literall=MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }} \
+            --save-config \
+            --dry-run=client \
+            -o yaml | kubectl apply -f -
+      
+        - name: Deploy to dev env
+          run: |
+            kubectl apply -f kubernetes/development/*.yaml
+      
      
         
 
