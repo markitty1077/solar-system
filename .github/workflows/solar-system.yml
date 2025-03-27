@@ -149,6 +149,8 @@ jobs:
     dev-deploy:
         needs: docker
         runs-on: ubuntu-latest
+        outputs:
+          APP_INGRESS_URL: ${{ steps.ingress1.outputs.APP_INGRESS_HOST }} 
         steps:
         - name: Checkout Repo
           uses: actions/checkout@v4
@@ -206,11 +208,11 @@ jobs:
         - name: Deploy to dev env
           run: |
             kubectl apply -f kubernetes/development/*.yaml
+
+        - id: ingress1
+          name: Set App Ingress Host URL
+          run: |
+            echo "APP_INGRESS_HOST=$(kubectl -n ${{ vars.NAMESPACE }} get ingress \
+            -o jsonpath="{.items[0].spec.tls[0].hosts[0]}")" >> "$GITHUB_OUTPUT"
       
-     
-        
-
-
-
-
- 
+  
