@@ -221,6 +221,7 @@ jobs:
           -o jsonpath="{.items[0].spec.tls[0].hosts[0]}")" >> "$GITHUB_OUTPUT"
 
   dev-integration-testing:
+    if: contains(github.ref, 'feature/')
     name: Dev integration testing
     runs-on: ubuntu-latest
     needs: dev-deploy
