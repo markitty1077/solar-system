@@ -236,7 +236,7 @@ jobs:
 
   # This will only work if triggered from main branch!  (because it is in a rule for the production environment)
   prod-deploy:
-    needs: dev-integration-testing
+    needs: docker
     environment:
       name: production
       url: https://${{ steps.ingress1.outputs.APP_INGRESS_HOST }}
