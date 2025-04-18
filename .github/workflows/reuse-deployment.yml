@@ -7,6 +7,8 @@ on:
         required: true
       mongodb-password: # another secret name
         required: true
+    # note: variables defined in the org or repo and automatically in the called workflow (this), of course only
+    # if the called workflow (this) is in the same org/repo
 
 jobs:
    reuse-deploy:
