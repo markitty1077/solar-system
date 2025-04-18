@@ -151,6 +151,13 @@ jobs:
       if: contains(github.ref, 'feature/')
       needs: docker
       uses: ./.github/workflows/reuse-deployment.yml
+      secrets:  
+      # the names below must match the names from the called (reusable) workflow,
+      # the values below would match the secret names in the repo, so the caller workflow (this) passes it into the 
+      # called workflow (reusable)
+        k8s-kubeconfig: ${{ secrets.KUBECONFIG }}
+        mongodb-password: ${{ secrets.MONGO_PASSWORD }}
+        
 
   dev-integration-testing:
     if: contains(github.ref, 'feature/')
