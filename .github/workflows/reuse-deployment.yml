@@ -9,6 +9,8 @@ on:
         required: true
     # note: variables defined in the org or repo and automatically in the called workflow (this), of course only
     # if the called workflow (this) is in the same org/repo
+    # BUT envrionment variables (defined at top of workflow) from the caller workflow are not automatically passed to the 
+    # called workflow
 
 jobs:
    reuse-deploy:
