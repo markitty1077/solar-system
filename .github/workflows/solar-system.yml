@@ -181,7 +181,7 @@ jobs:
     needs: docker
     uses: ./.github/workflows/reuse-deployment.yml
     with:
-      mongodb-uri: ${{ env.MONGO_URI }}
+      mongodb-uri: ${{ vars.MONGO_URI }}
     secrets:  
     # the names below must match the names from the called (reusable) workflow,
     # the values below would match the secret names in the repo, so the caller workflow (this) passes it into the 
