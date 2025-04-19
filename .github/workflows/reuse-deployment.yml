@@ -2,6 +2,10 @@ name: Deployment - Reusable Workflow
 
 on:
   workflow_call:
+    inputs:
+      mongodb-uri:
+        required: true
+        type: string
     secrets:
       k8s-kubeconfig:  # this is one of the secrets name that you can choose
         required: true
@@ -67,7 +71,7 @@ jobs:
       - name: Create MongoDB Secret
         run: |
           kubectl -n ${{ vars.NAMESPACE }} create secret generic mongo-db-creds \
-          --from-literall=MONGO_URI=${{ env.MONGO_URI }} \ # defined in env
+          --from-literall=MONGO_URI=${{ inputs.mongodb-uri }} \ # defined in env
           --from-literall=MONGO_USERNAME=${{ vars.MONGO_USERNAME }} \ # defined in repo
           --from-literall=MONGO_PASSWORD=${{ secrets.mongodb-password }} \
           --save-config \

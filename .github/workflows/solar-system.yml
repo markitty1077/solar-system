@@ -8,7 +8,7 @@ on:
             - 'feature/*'
 
 env:
-    MONGO_URI: 'mongodb+srv://supercluster.d83jj.mongodb.net/superData'
+    MONGO_URI: ${{ vars.MONGO_URI }}
     MONGO_USERNAME: ${{ vars.MONGO_USERNAME }}
     MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
 
@@ -151,6 +151,8 @@ jobs:
       if: contains(github.ref, 'feature/')
       needs: docker
       uses: ./.github/workflows/reuse-deployment.yml
+      with:
+        mongodb-uri: ${{ env.MONGO_URI }}
       secrets:  
       # the names below must match the names from the called (reusable) workflow,
       # the values below would match the secret names in the repo, so the caller workflow (this) passes it into the 
@@ -178,6 +180,8 @@ jobs:
     if: github.ref == 'refs/heads/main'
     needs: docker
     uses: ./.github/workflows/reuse-deployment.yml
+    with:
+      mongodb-uri: ${{ env.MONGO_URI }}
     secrets:  
     # the names below must match the names from the called (reusable) workflow,
     # the values below would match the secret names in the repo, so the caller workflow (this) passes it into the 
