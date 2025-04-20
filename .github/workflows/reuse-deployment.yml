@@ -2,6 +2,10 @@ name: Deployment - Reusable Workflow
 
 on:
   workflow_call:
+    outputs:
+      application-url:
+        description: "App Ingress URL"
+        value: ${{ jobs.reuse-deploy.outputs.APP_INGRESS_URL }}
     inputs:
       mongodb-uri:
         required: true
