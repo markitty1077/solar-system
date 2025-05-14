@@ -15,9 +15,3 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         giphy-api-key: ${{ secrets.GIPHY_API_KEY }}
-        
-    - name: Post JavaScript Custom PR Comment
-      uses: markitty1077/js-action-pr-giphy-comment@main # calling from outside the custom repo
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        giphy-api-key: ${{ secrets.GIPHY_API_KEY }}
