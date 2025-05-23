@@ -20,3 +20,4 @@ jobs:
           else
             echo "Not a bug"
           fi
+ 
